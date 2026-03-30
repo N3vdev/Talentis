@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talentis — Recruitment Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --g-dark:   #0b2318;
+  --g-mid:    #163d28;
+  --g-accent: #22c55e;
+  --g-light:  #4ade80;
+  --white:    #ffffff;
+  --gray-bg:  #f2f5f2;
+  --gray-txt: #687568;
+  --nav-h:    68px;
+  --gap:      18px;
+  --r:        24px;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: auto; }
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  background: var(--white);
+  color: var(--g-dark);
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: var(--gap);
+  left: var(--gap);
+  right: var(--gap);
+  z-index: 300;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  background: rgba(11,35,24,0.96);
+  backdrop-filter: blur(20px);
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.07);
+  animation: slideDown 0.6s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes slideDown { from{opacity:0;transform:translateY(-20px);} to{opacity:1;transform:none;} }
+
+.nav-logo {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900; font-size: 1.25rem;
+  color: var(--white); letter-spacing: -0.5px;
+}
+.nav-logo em { color: var(--g-accent); font-style: normal; }
+
+.nav-links { display:flex; gap:28px; list-style:none; }
+.nav-links a {
+  color: rgba(255,255,255,0.52);
+  text-decoration: none;
+  font-size: 0.84rem; font-weight: 700;
+  transition: color .2s;
+  position: relative;
+}
+.nav-links a::after {
+  content:''; position:absolute;
+  bottom:-3px; left:0; right:0;
+  height:1.5px; background: var(--g-accent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .25s ease;
+}
+.nav-links a:hover { color:var(--white); }
+.nav-links a:hover::after { transform: scaleX(1); }
+
+.nav-cta {
+  background: var(--g-accent); color: var(--g-dark);
+  border: none; padding: 9px 22px; border-radius: 50px;
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.83rem;
+  cursor: pointer; transition: background .2s, transform .15s;
+}
+.nav-cta:hover { background: var(--g-light); transform: scale(1.04); }
+
+/* SECTION SHELL — every section fills exactly 100vh */
+.page-section {
+  height: 100vh;
+  min-height: 640px;
+  padding: var(--gap);
+  display: flex;
+  flex-direction: column;
+  scroll-margin-top: 0;
+}
+/* Hero only: extra top padding to clear the fixed nav */
+#hero {
+  padding-top: calc(var(--nav-h) + var(--gap) * 2);
+}
+
+.section-card {
+  flex: 1;
+  border-radius: var(--r);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+}
+
+/* ── HERO ── */
+.hero-card { background: var(--g-dark); width:100%; }
+
+.hero-card::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 10%, rgba(34,197,94,0.14) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 40% at 10% 90%, rgba(34,197,94,0.07) 0%, transparent 55%);
+  z-index:0; pointer-events:none;
+}
+.hero-card::after {
+  content:''; position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.016) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px);
+  background-size: 56px 56px;
+  z-index:0; pointer-events:none;
+}
+
+.hero-inner {
+  position:relative; z-index:2;
+  width:100%; height:100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.hero-left {
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: 56px 52px 56px 60px;
+  gap: 28px;
+}
+
+.hero-eyebrow { display:inline-flex; align-items:center; gap:8px; }
+.eyebrow-dot {
+  width:7px; height:7px; border-radius:50%;
+  background:var(--g-accent);
+  animation: pulse 2.2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,.4);} 50%{opacity:.5;box-shadow:0 0 0 6px rgba(34,197,94,0);} }
+.eyebrow-text {
+  font-size:.72rem; font-weight:800;
+  color:var(--g-accent); letter-spacing:1.4px; text-transform:uppercase;
+}
+
+.hero-headline {
+  font-family:'Nunito',sans-serif;
+  font-size:clamp(2.8rem,3.8vw,4.6rem);
+  font-weight:900; color:var(--white);
+  line-height:1.0; letter-spacing:-2.5px;
+}
+.hero-headline .hl { color:transparent; -webkit-text-stroke:1.5px var(--g-accent); }
+
+.hero-sub {
+  font-size:.96rem; color:rgba(255,255,255,.44);
+  line-height:1.75; max-width:440px;
+}
+
+.hero-search {
+  display:flex; align-items:center;
+  background:rgba(255,255,255,.07);
+  border:1.5px solid rgba(255,255,255,.12);
+  border-radius:50px;
+  padding:6px 6px 6px 22px; gap:8px;
+  max-width:480px; transition:border-color .2s;
+}
+.hero-search:focus-within { border-color:rgba(34,197,94,.5); }
+.hero-search input {
+  flex:1; background:none; border:none; outline:none;
+  color:var(--white); font-family:'Nunito Sans',sans-serif;
+  font-size:.87rem; font-weight:600;
+}
+.hero-search input::placeholder { color:rgba(255,255,255,.28); }
+.hero-search button {
+  background:var(--g-accent); color:var(--g-dark);
+  border:none; padding:10px 22px; border-radius:50px;
+  font-family:'Nunito',sans-serif; font-weight:800; font-size:.81rem;
+  cursor:pointer; white-space:nowrap; transition:background .2s;
+}
+.hero-search button:hover { background:var(--g-light); }
+
+.hero-btns { display:flex; gap:10px; flex-wrap:wrap; }
+
+.btn-primary {
+  background:var(--g-accent); color:var(--g-dark);
+  border:none; padding:12px 26px; border-radius:50px;
+  font-family:'Nunito',sans-serif; font-weight:800; font-size:.88rem;
+  cursor:pointer; transition:background .2s, transform .2s;
+}
+.btn-primary:hover { background:var(--g-light); transform:translateY(-2px); }
+
+.btn-ghost {
+  background:transparent; color:rgba(255,255,255,.65);
+  border:1.5px solid rgba(255,255,255,.2);
+  padding:12px 26px; border-radius:50px;
+  font-family:'Nunito',sans-serif; font-weight:700; font-size:.88rem;
+  cursor:pointer; transition:border-color .2s, color .2s;
+}
+.btn-ghost:hover { border-color:rgba(255,255,255,.5); color:var(--white); }
+
+.hero-stats {
+  display:flex; gap:0;
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-top:24px;
+}
+.stat-block { padding-right:32px; }
+.stat-block+.stat-block {
+  padding-left:32px; padding-right:32px;
+  border-left:1px solid rgba(255,255,255,.08);
+}
+.stat-val {
+  font-family:'Nunito',sans-serif;
+  font-size:1.85rem; font-weight:900;
+  color:var(--white); letter-spacing:-1px; line-height:1;
+}
+.stat-val em { font-style:normal; color:var(--g-accent); font-size:1rem; }
+.stat-lbl {
+  font-size:.65rem; font-weight:700;
+  color:rgba(255,255,255,.32);
+  text-transform:uppercase; letter-spacing:.8px; margin-top:5px;
+}
+
+.hero-right { position:relative; overflow:hidden; }
+.hero-img {
+  width:100%; height:100%; object-fit:cover;
+  opacity:.55; filter:saturate(0.6);
+  transition:transform 8s ease;
+}
+.hero-card:hover .hero-img { transform:scale(1.04); }
+
+.hero-float-card {
+  position:absolute; bottom:40px; left:32px;
+  background:rgba(11,35,24,.92);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(34,197,94,.25);
+  border-radius:16px; padding:18px 22px;
+  display:flex; flex-direction:column; gap:10px;
+  animation:floatUp 1s 0.9s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes floatUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:none;} }
+.float-label {
+  font-size:.64rem; font-weight:800;
+  color:rgba(255,255,255,.34); text-transform:uppercase; letter-spacing:1.2px;
+}
+.float-jobs { display:flex; flex-direction:column; gap:8px; }
+.float-job { display:flex; align-items:center; gap:10px; }
+.float-dot { width:6px; height:6px; border-radius:50%; background:var(--g-accent); flex-shrink:0; }
+.float-job-name { font-family:'Nunito',sans-serif; font-weight:800; font-size:.81rem; color:var(--white); flex:1; }
+.float-job-co { font-size:.71rem; color:rgba(255,255,255,.36); white-space:nowrap; }
+.float-badge {
+  font-size:.59rem; font-weight:800; padding:3px 8px; border-radius:20px;
+  background:rgba(34,197,94,.18); color:var(--g-accent);
+}
+
+.hero-left > * { animation:fadeUp 0.7s cubic-bezier(.22,1,.36,1) both; }
+.hero-left > *:nth-child(1){animation-delay:.1s;}
+.hero-left > *:nth-child(2){animation-delay:.2s;}
+.hero-left > *:nth-child(3){animation-delay:.3s;}
+.hero-left > *:nth-child(4){animation-delay:.4s;}
+.hero-left > *:nth-child(5){animation-delay:.5s;}
+.hero-left > *:nth-child(6){animation-delay:.6s;}
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px);} to{opacity:1;transform:none;} }
+
+/* ── TICKER ── */
+.ticker-wrap {
+  margin:0 var(--gap); background:var(--g-accent);
+  border-radius:50px; overflow:hidden; padding:12px 0; display:flex;
+}
+.ticker-track {
+  display:flex; animation:ticker 28s linear infinite;
+  white-space:nowrap; flex-shrink:0;
+}
+@keyframes ticker { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+.t-item {
+  font-family:'Nunito',sans-serif; font-weight:800; font-size:.8rem;
+  color:var(--g-dark); padding:0 26px;
+  display:flex; align-items:center; gap:26px;
+}
+.t-item::after { content:''; width:4px; height:4px; border-radius:50%; background:rgba(11,35,24,.3); flex-shrink:0; }
+
+/* ── HOW IT WORKS ── */
+.how-card {
+  background:var(--gray-bg); border:1.5px solid #e0e8e0;
+  width:100%; display:grid; grid-template-columns:1fr 1fr;
+}
+.how-left {
+  display:flex; flex-direction:column; justify-content:center;
+  padding:60px 56px; gap:24px;
+  border-right:1px solid #dce8dc;
+}
+.how-img-wrap { position:relative; overflow:hidden; }
+.how-img { width:100%; height:100%; object-fit:cover; opacity:.85; transition:transform 6s ease; }
+.how-card:hover .how-img { transform:scale(1.03); }
+.how-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(135deg,rgba(11,35,24,.35) 0%,transparent 60%);
+}
+
+.steps-list { display:flex; flex-direction:column; margin-top:8px; }
+.step-item {
+  display:flex; gap:18px; padding:18px 0;
+  border-bottom:1px solid #dce8dc; cursor:default;
+}
+.step-item:last-child { border-bottom:none; }
+.step-num {
+  width:36px; height:36px; flex-shrink:0; border-radius:10px;
+  background:var(--g-dark); color:var(--g-accent);
+  font-family:'Nunito',sans-serif; font-weight:900; font-size:.72rem;
+  display:flex; align-items:center; justify-content:center; letter-spacing:.5px;
+}
+.step-title { font-family:'Nunito',sans-serif; font-weight:800; font-size:.93rem; color:var(--g-dark); margin-bottom:4px; }
+.step-desc { font-size:.81rem; color:var(--gray-txt); line-height:1.65; }
+
+/* ── SERVICES ── */
+.svc-card-outer {
+  background:var(--g-dark); width:100%;
+  display:grid; grid-template-columns:1fr 1fr;
+}
+.svc-img-wrap { position:relative; overflow:hidden; }
+.svc-img { width:100%; height:100%; object-fit:cover; opacity:.45; filter:saturate(.55); transition:transform 6s ease; }
+.svc-card-outer:hover .svc-img { transform:scale(1.04); }
+.svc-img-overlay { position:absolute; inset:0; background:linear-gradient(to right,var(--g-dark) 0%,transparent 70%); }
+.svc-right {
+  display:flex; flex-direction:column; justify-content:center;
+  padding:52px 60px 52px 52px; gap:24px;
+}
+.svc-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.svc-item {
+  background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07);
+  border-radius:14px; padding:20px;
+  transition:background .3s, border-color .3s, transform .3s; cursor:default;
+}
+.svc-item:hover { background:rgba(34,197,94,.09); border-color:rgba(34,197,94,.25); transform:translateY(-2px); }
+.svc-icon {
+  width:40px; height:40px; border-radius:10px;
+  background:rgba(34,197,94,.12); border:1px solid rgba(34,197,94,.2);
+  display:flex; align-items:center; justify-content:center; margin-bottom:12px;
+}
+.svc-icon svg { width:17px; height:17px; stroke:var(--g-accent); fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.svc-name { font-family:'Nunito',sans-serif; font-weight:800; font-size:.87rem; color:var(--white); margin-bottom:5px; }
+.svc-desc { font-size:.77rem; color:rgba(255,255,255,.36); line-height:1.6; }
+
+/* ── TESTIMONIALS ── */
+.testi-card-outer {
+  background:var(--gray-bg); border:1.5px solid #e0e8e0;
+  width:100%; display:grid; grid-template-columns:1fr 1fr;
+}
+.testi-left {
+  display:flex; flex-direction:column; justify-content:center;
+  padding:56px 52px; gap:24px;
+}
+.testi-grid { display:flex; flex-direction:column; gap:12px; }
+.testi-item {
+  background:var(--white); border:1.5px solid #e0e8e0;
+  border-radius:16px; padding:20px;
+  display:flex; flex-direction:column; gap:10px;
+  transition:border-color .3s, transform .3s; cursor:default;
+}
+.testi-item:hover { border-color:var(--g-accent); transform:translateY(-3px); }
+.testi-stars { display:flex; gap:3px; }
+.testi-stars svg { width:11px; height:11px; fill:var(--g-accent); }
+.testi-quote { font-size:.83rem; color:var(--gray-txt); line-height:1.7; font-style:italic; }
+.testi-author { display:flex; align-items:center; gap:10px; padding-top:10px; border-top:1px solid #eef2ee; }
+.testi-av { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Nunito',sans-serif; font-weight:900; font-size:.72rem; color:var(--white); flex-shrink:0; }
+.testi-name { font-family:'Nunito',sans-serif; font-weight:800; font-size:.82rem; color:var(--g-dark); }
+.testi-role { font-size:.69rem; color:var(--gray-txt); font-weight:600; }
+.testi-img-wrap { position:relative; overflow:hidden; }
+.testi-img { width:100%; height:100%; object-fit:cover; opacity:.8; transition:transform 6s ease; }
+.testi-card-outer:hover .testi-img { transform:scale(1.03); }
+.testi-img-overlay { position:absolute; inset:0; background:linear-gradient(to left,var(--gray-bg) 0%,transparent 60%); }
+
+/* ── CTA ── */
+.cta-card {
+  background:var(--g-dark); width:100%;
+  display:flex; align-items:center; justify-content:center;
+  flex-direction:column; overflow:hidden;
+}
+.cta-bg-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.18; filter:saturate(.4); }
+.cta-glow { position:absolute; bottom:-100px; left:50%; transform:translateX(-50%); width:700px; height:400px; background:radial-gradient(ellipse,rgba(34,197,94,.18) 0%,transparent 65%); pointer-events:none; }
+.cta-inner {
+  position:relative; z-index:2; text-align:center;
+  padding:80px 40px; display:flex; flex-direction:column; align-items:center; gap:18px;
+}
+.cta-headline {
+  font-family:'Nunito',sans-serif; font-size:clamp(2.2rem,3.5vw,3.6rem);
+  font-weight:900; color:var(--white); letter-spacing:-1.5px;
+  line-height:1.05; max-width:580px;
+}
+.cta-sub { font-size:.97rem; color:rgba(255,255,255,.42); max-width:440px; line-height:1.72; }
+.cta-btns { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:8px; }
+
+/* tags / labels */
+.tag {
+  display:inline-block; font-size:.7rem; font-weight:800;
+  text-transform:uppercase; letter-spacing:1.2px;
+  padding:5px 14px; border-radius:50px;
+}
+.tag-green { background:rgba(34,197,94,.12); color:#16a34a; }
+.tag-white { background:rgba(34,197,94,.18); color:var(--g-accent); }
+
+.sec-title {
+  font-family:'Nunito',sans-serif;
+  font-size:clamp(1.8rem,2.5vw,2.7rem);
+  font-weight:900; letter-spacing:-1px; line-height:1.08;
+  color:var(--g-dark); margin-bottom:8px;
+}
+.sec-title-w { color:var(--white); }
+.sec-sub { font-size:.92rem; color:var(--gray-txt); line-height:1.75; }
+.sec-sub-w { color:rgba(255,255,255,.42); }
+
+/* FOOTER */
+footer {
+  margin:var(--gap); background:var(--gray-bg);
+  border:1.5px solid #e0e8e0; border-radius:var(--r);
+  padding:52px 60px 36px;
+  display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px;
+}
+.foot-logo { font-family:'Nunito',sans-serif; font-weight:900; font-size:1.28rem; color:var(--g-dark); margin-bottom:10px; }
+.foot-logo em { color:var(--g-accent); font-style:normal; }
+.foot-desc { font-size:.8rem; color:var(--gray-txt); line-height:1.7; max-width:220px; margin-bottom:20px; }
+.foot-socials { display:flex; gap:8px; }
+.soc { width:32px; height:32px; border-radius:8px; background:var(--g-dark); color:var(--white); font-family:'Nunito',sans-serif; font-weight:900; font-size:.68rem; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background .2s; }
+.soc:hover { background:var(--g-accent); color:var(--g-dark); }
+.foot-col h5 { font-family:'Nunito',sans-serif; font-weight:800; font-size:.82rem; color:var(--g-dark); margin-bottom:14px; }
+.foot-col ul { list-style:none; display:flex; flex-direction:column; gap:9px; }
+.foot-col ul li a { font-size:.8rem; color:var(--gray-txt); text-decoration:none; font-weight:600; transition:color .2s; }
+.foot-col ul li a:hover { color:var(--g-accent); }
+.foot-bar { text-align:center; padding:0 var(--gap) 20px; font-size:.76rem; color:#9db09d; font-weight:600; }
+
+/* REVEAL ANIMATIONS */
+.reveal { opacity:0; transform:translateY(32px); transition:opacity .7s ease,transform .7s ease; }
+.reveal.in { opacity:1; transform:none; }
+.reveal-left { opacity:0; transform:translateX(-32px); transition:opacity .7s ease,transform .7s ease; }
+.reveal-left.in { opacity:1; transform:none; }
+.reveal-right { opacity:0; transform:translateX(32px); transition:opacity .7s ease,transform .7s ease; }
+.reveal-right.in { opacity:1; transform:none; }
+
+.stagger > * { opacity:0; transform:translateY(20px); transition:opacity .5s ease,transform .5s ease; }
+.stagger.in > *:nth-child(1){opacity:1;transform:none;transition-delay:.05s;}
+.stagger.in > *:nth-child(2){opacity:1;transform:none;transition-delay:.15s;}
+.stagger.in > *:nth-child(3){opacity:1;transform:none;transition-delay:.25s;}
+.stagger.in > *:nth-child(4){opacity:1;transform:none;transition-delay:.35s;}
+.stagger.in > *:nth-child(5){opacity:1;transform:none;transition-delay:.45s;}
+.stagger.in > *:nth-child(6){opacity:1;transform:none;transition-delay:.55s;}
+
+/* RESPONSIVE */
+@media (max-width:1024px) {
+  .hero-inner,.how-card,.svc-card-outer,.testi-card-outer { grid-template-columns:1fr; }
+  .hero-right,.how-img-wrap,.svc-img-wrap,.testi-img-wrap { display:none; }
+  .how-left,.svc-right,.testi-left { padding:48px 44px; border:none; }
+  .page-section { height:auto; min-height:100vh; }
+  footer { grid-template-columns:repeat(2,1fr); padding:44px 36px; }
+}
+@media (max-width:768px) {
+  :root { --gap:12px; --nav-h:60px; }
+  .nav-links { display:none; }
+  .hero-left { padding:36px 24px; gap:22px; }
+  .how-left,.svc-right,.testi-left { padding:36px 24px; }
+  .svc-grid { grid-template-columns:1fr; }
+  .cta-inner { padding:56px 24px; }
+  footer { grid-template-columns:1fr; padding:36px 24px; }
+}
+@media (max-width:480px) {
+  .hero-search { flex-direction:column; border-radius:16px; padding:14px 18px; }
+  .hero-search input { width:100%; }
+  .hero-search button { width:100%; text-align:center; }
+  .hero-stats { flex-wrap:wrap; gap:16px; }
+  .stat-block+.stat-block { border-left:none; padding-left:0; }
+}
+
+/* ── MODAL ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(6, 20, 13, 0.72);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal {
+  background: var(--white);
+  border-radius: 22px;
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  transform: translateY(28px) scale(0.97);
+  transition: transform 0.35s cubic-bezier(.22,1,.36,1), opacity 0.3s ease;
+  opacity: 0;
+  box-shadow: 0 32px 80px rgba(6,20,13,0.22), 0 0 0 1px rgba(34,197,94,0.08);
+}
+.modal-overlay.open .modal {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.modal-close {
+  position: absolute;
+  top: 18px; right: 18px;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid #e0e8e0;
+  background: transparent;
+  color: var(--gray-txt);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.modal-close:hover {
+  background: var(--g-dark);
+  border-color: var(--g-dark);
+  color: var(--white);
+}
+
+.modal-header {
+  padding: 36px 36px 24px;
+  border-bottom: 1px solid #eef2ee;
+}
+.modal-tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding: 4px 12px;
+  border-radius: 50px;
+  background: rgba(34,197,94,0.1);
+  color: #16a34a;
+  margin-bottom: 12px;
+}
+.modal-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: var(--g-dark);
+  letter-spacing: -0.8px;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+.modal-sub {
+  font-size: 0.85rem;
+  color: var(--gray-txt);
+  line-height: 1.65;
+}
+
+.modal-body {
+  padding: 28px 36px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.modal-field label {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--g-dark);
+  letter-spacing: 0.3px;
+}
+.modal-field input,
+.modal-field textarea,
+.modal-field select {
+  width: 100%;
+  padding: 11px 16px;
+  border: 1.5px solid #dce8dc;
+  border-radius: 10px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 0.88rem;
+  color: var(--g-dark);
+  background: var(--gray-bg);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  resize: none;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23687568' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 12px;
+  cursor: pointer;
+}
+.modal-field input,
+.modal-field textarea {
+  background-image: none;
+  cursor: text;
+}
+.modal-field input:focus,
+.modal-field textarea:focus,
+.modal-field select:focus {
+  border-color: var(--g-accent);
+  background: var(--white);
+}
+.modal-field input.invalid,
+.modal-field textarea.invalid,
+.modal-field select.invalid {
+  border-color: #e74c3c;
+}
+.field-err {
+  font-size: 0.73rem;
+  color: #e74c3c;
+  font-weight: 600;
+  min-height: 16px;
+}
+
+.modal-submit {
+  width: 100%;
+  background: var(--g-accent);
+  color: var(--g-dark);
+  border: none;
+  padding: 13px;
+  border-radius: 50px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 4px;
+}
+.modal-submit:hover { background: var(--g-light); transform: translateY(-1px); }
+.modal-submit:active { transform: translateY(0); }
+
+/* Success state */
+.modal-success {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 52px 36px;
+  gap: 14px;
+}
+.modal-success.show { display: flex; }
+.modal-body.hide { display: none; }
+.modal-header.hide { display: none; }
+
+.success-icon {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: rgba(34,197,94,0.12);
+  border: 2px solid rgba(34,197,94,0.3);
+  display: flex; align-items: center; justify-content: center;
+  animation: popIn 0.5s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes popIn { from{transform:scale(0.5);opacity:0;} to{transform:scale(1);opacity:1;} }
+.success-icon svg {
+  width: 28px; height: 28px;
+  stroke: var(--g-accent);
+}
+.modal-success h3 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 1.4rem;
+  color: var(--g-dark);
+  letter-spacing: -0.5px;
+}
+.modal-success p {
+  font-size: 0.88rem;
+  color: var(--gray-txt);
+  line-height: 1.7;
+  max-width: 320px;
+}
+
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Talentis<em>.</em></div>
+  <ul class="nav-links">
+    <li><a href="#how">Process</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#cta">Contact</a></li>
+  </ul>
+  <button class="nav-cta" id="openModal">Book a Call</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="page-section">
+  <div class="section-card hero-card">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-eyebrow">
+          <span class="eyebrow-dot"></span>
+          <span class="eyebrow-text">Trusted by 1,200+ Companies Worldwide</span>
+        </div>
+        <h1 class="hero-headline">We Place<br><span class="hl">Exceptional</span><br>Talent.</h1>
+        <p class="hero-sub">Talentis connects growing businesses with high-calibre professionals across every discipline — precise matching, faster hiring, better long-term outcomes.</p>
+        <div class="hero-search">
+          <input type="text" placeholder="Job title, skill, or keyword…" />
+          <button>Search Roles</button>
+        </div>
+        <div class="hero-btns">
+          <button class="btn-primary">Hire Talent</button>
+          <button class="btn-ghost">Find a Job</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-block">
+            <div class="stat-val">48k<em>+</em></div>
+            <div class="stat-lbl">Placements</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-val">12<em>d</em></div>
+            <div class="stat-lbl">Avg. Hire Time</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-val">96<em>%</em></div>
+            <div class="stat-lbl">Retention</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <img class="hero-img" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=900&auto=format&fit=crop&q=80" alt="Team collaboration" />
+        <div class="hero-float-card">
+          <div class="float-label">Featured Openings</div>
+          <div class="float-jobs">
+            <div class="float-job">
+              <span class="float-dot"></span>
+              <span class="float-job-name">Senior Product Designer</span>
+              <span class="float-job-co">Stripe</span>
+              <span class="float-badge">New</span>
+            </div>
+            <div class="float-job">
+              <span class="float-dot"></span>
+              <span class="float-job-name">Growth Marketing Lead</span>
+              <span class="float-job-co">Notion</span>
+              <span class="float-badge">Hot</span>
+            </div>
+            <div class="float-job">
+              <span class="float-dot"></span>
+              <span class="float-job-name">Engineering Manager</span>
+              <span class="float-job-co">Linear</span>
+              <span class="float-badge">New</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="t-item">Technology</span><span class="t-item">Healthcare</span><span class="t-item">Finance</span>
+    <span class="t-item">Marketing</span><span class="t-item">Engineering</span><span class="t-item">Legal</span>
+    <span class="t-item">Design</span><span class="t-item">Sales</span><span class="t-item">Operations</span>
+    <span class="t-item">Education</span><span class="t-item">Technology</span><span class="t-item">Healthcare</span>
+    <span class="t-item">Finance</span><span class="t-item">Marketing</span><span class="t-item">Engineering</span>
+    <span class="t-item">Legal</span><span class="t-item">Design</span><span class="t-item">Sales</span>
+    <span class="t-item">Operations</span><span class="t-item">Education</span>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="page-section">
+  <div class="section-card how-card">
+    <div class="how-left reveal-left">
+      <div>
+        <span class="tag tag-green" style="margin-bottom:12px;display:inline-block;">Our Process</span>
+        <h2 class="sec-title">From Brief<br>to Signed Offer</h2>
+        <p class="sec-sub" style="max-width:380px;">A clear, four-step process designed to eliminate delays and deliver quality every time.</p>
+      </div>
+      <div class="steps-list stagger">
+        <div class="step-item">
+          <div class="step-num">01</div>
+          <div>
+            <div class="step-title">Share Your Brief</div>
+            <p class="step-desc">Tell us about the role, team, compensation, and what a great hire looks like in practice.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">02</div>
+          <div>
+            <div class="step-title">We Source &amp; Screen</div>
+            <p class="step-desc">Our consultants tap a curated network and rigorously pre-screen every candidate before you see them.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">03</div>
+          <div>
+            <div class="step-title">Review the Shortlist</div>
+            <p class="step-desc">A focused shortlist of 3–5 candidates with in-depth profiles and consultant notes.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">04</div>
+          <div>
+            <div class="step-title">Hire with Confidence</div>
+            <p class="step-desc">Extend an offer backed by our placement guarantee. We stay through onboarding for a smooth start.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="how-img-wrap reveal-right">
+      <img class="how-img" src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&auto=format&fit=crop&q=80" alt="Interview in progress" />
+      <div class="how-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="page-section">
+  <div class="section-card svc-card-outer">
+    <div class="svc-img-wrap reveal-left">
+      <img class="svc-img" src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=900&auto=format&fit=crop&q=80" alt="Professional team meeting" />
+      <div class="svc-img-overlay"></div>
+    </div>
+    <div class="svc-right reveal-right">
+      <div>
+        <span class="tag tag-white" style="margin-bottom:12px;display:inline-block;">What We Do</span>
+        <h2 class="sec-title sec-title-w">Recruitment Built<br>for Every Stage</h2>
+        <p class="sec-sub sec-sub-w" style="max-width:360px;">From seed-stage startups to global enterprises, tailored to your hiring reality.</p>
+      </div>
+      <div class="svc-grid stagger">
+        <div class="svc-item">
+          <div class="svc-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+          <div class="svc-name">Executive Search</div>
+          <p class="svc-desc">Confidential C-suite &amp; Director searches with high-touch delivery.</p>
+        </div>
+        <div class="svc-item">
+          <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+          <div class="svc-name">Contract Staffing</div>
+          <p class="svc-desc">Rapid deployment of skilled contractors for any project or season.</p>
+        </div>
+        <div class="svc-item">
+          <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div class="svc-name">Team Buildout</div>
+          <p class="svc-desc">Scale entire departments quickly with consistent, parallel hiring.</p>
+        </div>
+        <div class="svc-item">
+          <div class="svc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <div class="svc-name">Global Hiring</div>
+          <p class="svc-desc">Cross-border placements with compliance &amp; cultural alignment.</p>
+        </div>
+        <div class="svc-item">
+          <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+          <div class="svc-name">Graduate Recruitment</div>
+          <p class="svc-desc">Build your future pipeline with exceptional early-career talent.</p>
+        </div>
+        <div class="svc-item">
+          <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div class="svc-name">RPO Solutions</div>
+          <p class="svc-desc">Embedded outsourcing — a scalable internal hiring function.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="page-section">
+  <div class="section-card testi-card-outer">
+    <div class="testi-left reveal-left">
+      <div>
+        <span class="tag tag-green" style="margin-bottom:12px;display:inline-block;">Client Stories</span>
+        <h2 class="sec-title">What Our<br>Clients Say</h2>
+      </div>
+      <div class="testi-grid stagger">
+        <div class="testi-item">
+          <div class="testi-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="testi-quote">"Talentis found us a Head of Product in under two weeks. Every candidate was a genuine fit — we hired our first choice without hesitation."</p>
+          <div class="testi-author">
+            <div class="testi-av" style="background:#0d6b3a;">AM</div>
+            <div><div class="testi-name">Aisha Mehta</div><div class="testi-role">CEO, Vora Labs</div></div>
+          </div>
+        </div>
+        <div class="testi-item">
+          <div class="testi-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="testi-quote">"We scaled our engineering team from 4 to 18 in a single quarter. Calibre was consistently high and the process was remarkably smooth."</p>
+          <div class="testi-author">
+            <div class="testi-av" style="background:#1a4a2e;">BK</div>
+            <div><div class="testi-name">Ben Kolawole</div><div class="testi-role">CTO, Stackfield</div></div>
+          </div>
+        </div>
+        <div class="testi-item">
+          <div class="testi-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="testi-quote">"As a candidate I felt genuinely looked after. Talentis placed me in a role I would never have found on my own — three years in and still loving it."</p>
+          <div class="testi-author">
+            <div class="testi-av" style="background:#166534;">SL</div>
+            <div><div class="testi-name">Sophie Laurent</div><div class="testi-role">Design Lead, Petal</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-img-wrap reveal-right">
+      <img class="testi-img" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&auto=format&fit=crop&q=80" alt="Happy professional" />
+      <div class="testi-img-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="page-section">
+  <div class="section-card cta-card reveal">
+    <img class="cta-bg-img" src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&auto=format&fit=crop&q=70" alt="Modern office" />
+    <div class="cta-glow"></div>
+    <div class="cta-inner">
+      <span class="tag tag-white">Get Started</span>
+      <h2 class="cta-headline">Ready to Build<br>Your Dream Team?</h2>
+      <p class="cta-sub">Whether you are hiring one specialist or scaling an entire department, we have a solution that fits. Let's talk today.</p>
+      <div class="cta-btns">
+        <button class="btn-primary" style="font-size:.93rem;padding:13px 32px;" id="ctaBookBtn">Book a Call</button>
+        <button class="btn-ghost" style="font-size:.93rem;padding:13px 32px;">I'm Looking for Work</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="foot-logo">Talentis<em>.</em></div>
+    <p class="foot-desc">Connecting people and companies to build careers and teams that endure. Trusted by 1,200 organisations worldwide.</p>
+    <div class="foot-socials">
+      <div class="soc">Li</div>
+      <div class="soc">Tw</div>
+      <div class="soc">Ig</div>
+    </div>
+  </div>
+  <div class="foot-col">
+    <h5>Company</h5>
+    <ul>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Our Team</a></li>
+      <li><a href="#">Careers</a></li>
+      <li><a href="#">Press</a></li>
+    </ul>
+  </div>
+  <div class="foot-col">
+    <h5>Services</h5>
+    <ul>
+      <li><a href="#">Executive Search</a></li>
+      <li><a href="#">Contract Staffing</a></li>
+      <li><a href="#">Team Buildout</a></li>
+      <li><a href="#">RPO Solutions</a></li>
+    </ul>
+  </div>
+  <div class="foot-col">
+    <h5>Resources</h5>
+    <ul>
+      <li><a href="#">Job Board</a></li>
+      <li><a href="#">Salary Guide</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="foot-bar">© 2026 Talentis Recruitment. All rights reserved.</div>
+
+
+
+
+<!-- ── MODAL ── -->
+<div id="modalOverlay" class="modal-overlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="closeModal" aria-label="Close">&times;</button>
+    <div class="modal-header">
+      <span class="modal-tag">Free Consultation</span>
+      <h2 class="modal-title" id="modalTitle">Book a Call</h2>
+      <p class="modal-sub">Schedule a free 30-minute call with one of our consultants. No commitment required.</p>
+    </div>
+    <div class="modal-body">
+      <div class="modal-field">
+        <label for="m-name">Full Name</label>
+        <input id="m-name" type="text" placeholder="Enter your full name" autocomplete="name" />
+        <span class="field-err" id="err-name"></span>
+      </div>
+      <div class="modal-field">
+        <label for="m-phone">Phone Number</label>
+        <input id="m-phone" type="tel" placeholder="Enter your phone number" autocomplete="tel" />
+        <span class="field-err" id="err-phone"></span>
+      </div>
+      <div class="modal-field">
+        <label for="m-budget">Hiring Budget</label>
+        <select id="m-budget">
+          <option value="" disabled selected>Select a range…</option>
+          <option value="under-50k">Under ₹50,000</option>
+          <option value="50k-100k">₹50,000 – ₹100,000</option>
+          <option value="100k-150k">₹100,000 – ₹150,000</option>
+          <option value="150k-200k">₹150,000 – ₹200,000</option>
+          <option value="200k+">₹200,000+</option>
+          <option value="flexible">Flexible / Discuss</option>
+        </select>
+        <span class="field-err" id="err-budget"></span>
+      </div>
+      <div class="modal-field">
+        <label for="m-role">Role Type</label>
+        <select id="m-role">
+          <option value="" disabled selected>Select a role type…</option>
+          <option value="executive">Executive / C-Suite</option>
+          <option value="senior">Senior Individual Contributor</option>
+          <option value="mid">Mid-Level</option>
+          <option value="contract">Contract / Interim</option>
+          <option value="graduate">Graduate / Entry-Level</option>
+          <option value="multiple">Multiple Roles</option>
+        </select>
+        <span class="field-err" id="err-role"></span>
+      </div>
+      <button class="modal-submit" id="modalSubmit">Book My Call</button>
+    </div>
+    <div class="modal-success" id="modalSuccess">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3>Call Booked!</h3>
+      <p>A consultant will call you within one business day to confirm your slot. Check your phone — we'll be in touch soon.</p>
+    </div>
+  </div>
+</div>
+<script>
+/* Intersection observer for all reveal classes */
+const allReveal = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .stagger');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+allReveal.forEach(el => obs.observe(el));
+
+/* Nav links: scroll exactly to section top (sections are 100vh, nav floats above) */
+document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (!target) return;
+    window.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
+  });
+});
+
+/* ── Modal ── */
+const overlay   = document.getElementById('modalOverlay');
+const openBtn   = document.getElementById('openModal');
+const closeBtn  = document.getElementById('closeModal');
+const submitBtn = document.getElementById('modalSubmit');
+const successEl = document.getElementById('modalSuccess');
+const bodyEl    = overlay.querySelector('.modal-body');
+const headerEl  = overlay.querySelector('.modal-header');
+
+function openModal() {
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => overlay.querySelector('#m-name').focus(), 350);
+}
+function closeModal() {
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+openBtn.addEventListener('click', openModal);
+const ctaBookBtn = document.getElementById('ctaBookBtn');
+if (ctaBookBtn) ctaBookBtn.addEventListener('click', openModal);
+closeBtn.addEventListener('click', closeModal);
+overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+function validate() {
+  const fields = [
+    { id: 'm-name',   err: 'err-name',   msg: 'Please enter your name.',        check: v => v.trim().length > 1 },
+    { id: 'm-phone',  err: 'err-phone',  msg: 'Please enter a phone number.',   check: v => v.trim().length > 6 },
+    { id: 'm-budget', err: 'err-budget', msg: 'Please select a budget range.',  check: v => v !== '' },
+    { id: 'm-role',   err: 'err-role',   msg: 'Please select a role type.',     check: v => v !== '' },
+  ];
+  let valid = true;
+  fields.forEach(f => {
+    const el  = document.getElementById(f.id);
+    const err = document.getElementById(f.err);
+    if (!f.check(el.value)) {
+      el.classList.add('invalid');
+      err.textContent = f.msg;
+      valid = false;
+    } else {
+      el.classList.remove('invalid');
+      err.textContent = '';
+    }
+  });
+  return valid;
+}
+
+submitBtn.addEventListener('click', () => {
+  if (!validate()) return;
+  submitBtn.textContent = 'Booking…';
+  submitBtn.disabled = true;
+  setTimeout(() => {
+    bodyEl.classList.add('hide');
+    headerEl.classList.add('hide');
+    successEl.classList.add('show');
+    // Reset after closing
+    setTimeout(() => {
+      ['m-name','m-phone','m-budget','m-role'].forEach(id => document.getElementById(id).value = '');
+      submitBtn.textContent = 'Book My Call';
+      submitBtn.disabled = false;
+    }, 500);
+  }, 900);
+});
+
+// Re-show form when reopening after success
+openBtn.addEventListener('click', () => {
+  bodyEl.classList.remove('hide');
+  headerEl.classList.remove('hide');
+  successEl.classList.remove('show');
+});
+
+
+</script>
+</body>
+</html>
